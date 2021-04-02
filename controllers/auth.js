@@ -4,14 +4,13 @@ const asyncErrorWrapper = require("express-async-handler");
 
 const register = asyncErrorWrapper(async (req, resp, next) => {
 
-    const name = "Mahammad Eminov";
-    const email = "eminov.mahammad@mail.ru";
-    const password = "12345";
+    const {name,email,password,role} = req.body;
 
     const user = await User.create({
         name,
         email,
-        password
+        password,
+        role
     });
 
     resp
