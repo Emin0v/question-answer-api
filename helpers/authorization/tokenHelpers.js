@@ -8,7 +8,7 @@ const sendJwtToClient = (user,resp) =>{
     return resp.status(200)
     .cookie("access-token",token,{
         httpOnly:true,
-        expires:new Date(Date.now()+(JWT_COOKIE)*1000),
+        expires:new Date(Date.now()+(JWT_COOKIE)*1000*60),
         secure: Node_ENV === "development" ? false : true
     })
     .json({
