@@ -38,6 +38,20 @@ const login = asyncErrorWrapper(async (req, resp, next) => {
    sendJwtToClient(user,resp);
 });
 
+const logout = asyncErrorWrapper(async (req, resp, next) => {
+
+  const {Node_ENV} = process.env;
+
+  return resp.status(200).cookie({
+       httpOnly:true,
+       expires:new Date(Date.now()),
+       secure:Node_ENV === "development" ? false : true
+  }).json({
+     success : true,
+     message : "Logout Successful"
+  })
+});
+
 const getUser = (req,resp,next)=>{
       resp.json({
          
@@ -52,5 +66,6 @@ const getUser = (req,resp,next)=>{
 module.exports = {
     register,
     login,
+    logout,
     getUser
 };
